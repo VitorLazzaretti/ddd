@@ -7,17 +7,21 @@ interface Controller {
 }
 
 export class CreateUserController implements Controller {
-  constructor(
-    private createUserUseCase: CreateUserUseCase
-  ) { }
+  private createUserUseCase: CreateUserUseCase;
+
+  constructor(useCase: CreateUserUseCase) {
+    this.createUserUseCase = useCase;
+  }
 
   public async handle(request: Request, response: Response): Promise<Response> {
     try {
       const data: CreateUserDTO = request.body;
+      console.log(data);
       const ret = await this.createUserUseCase.execute({}, data);
 
       return response.status(201).json(ret);
     } catch (error) {
+      console.error("Error creating user: ", error);
       return response.status(500).json({ error: error, message: "Failed to create user" });
     }
   }

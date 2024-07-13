@@ -2,7 +2,8 @@ import { RepositoryPort } from "../ddd/repository.port.base";
 
 export class DatabaseRepositoryBase<Entity, Schema> implements RepositoryPort<Entity> {
   insert(entity: Entity | Entity[]): Promise<void> {
-    throw new Error("Method not implemented.");
+    console.log("ENTITY SAVED! \n\n", entity, "\n\n");
+    return Promise.resolve();
   }
   findOneById(id: string): Promise<Entity | null> {
     throw new Error("Method not implemented.");
